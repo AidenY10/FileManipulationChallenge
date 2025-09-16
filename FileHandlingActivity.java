@@ -5,7 +5,7 @@ import java.nio.file.Path;
 public class FileHandlingActivity {
     public static void main(String[] args) throws IOException {
         // Your code here
-        
+
         // a. Create main directory
         File dirMain = new File("JavaFileSystem");
         dirMain.mkdir();
@@ -39,5 +39,21 @@ public class FileHandlingActivity {
         Files.writeString(Path.of("JavaFileSystem/Backup/backup.txt"), all);
         // g. List all files in both directories
         System.out.println("notes.txt\ndata.txt\nlog.txt\nbackup.txt");
+        debugFileOperation();
+    }
+    
+    public static void debugFileOperation() {
+        try {
+    // Creating a file with an invalid name (forward slash is invalid for file names on many OS)
+    File file = new File("fileName.txt");
+    
+    // Attempting to write to the invalid file
+    FileWriter writer = new FileWriter(file);
+    writer.write("Will this fail?");
+    writer.close();
+} catch (IOException e) {
+    System.out.println("An error occurred: " + e.getMessage());
+    e.printStackTrace(); 
+}
     }
 }
